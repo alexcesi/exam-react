@@ -1,3 +1,7 @@
+Lien github
+
+https://github.com/alexcesi/exam-react
+
 ## Créer le projet 
 npx create-react-app <nom du projet>
 ## Github actions générer le main.yml de base
