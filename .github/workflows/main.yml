@@ -42,5 +42,11 @@ jobs:
       - name: Adding Known Hosts
         run: ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
 
+      - name: Add folder build
+        run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} mkdir -p ./web/build
+
       - name: Deploy with rsync
-        run: rsync -avz ./build/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:~/web
+        run: rsync -avz ./build/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:~/web/build
+
+      - name: Rename folder
+        run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'mv ~/web/build ~/web/build-$(date +%Y%m%d_%H%M%S)'
